@@ -1,9 +1,12 @@
-package board
+package board_test
 
-import "testing"
+import (
+	"connect_four/board"
+	"testing"
+)
 
 func TestDisplayEmpty(t *testing.T) {
-	got := DisplayEmpty()
+	got := board.DisplayEmpty()
 	want := "  1   2   3   4   5   6   7\n" +
 		"-----------------------------\n" +
 		"| . | . | . | . | . | . | . |\n" +
@@ -29,7 +32,7 @@ func TestDisplayPieces(t *testing.T) {
 		{0, 1, 2, 2, 0, 0, 0},
 	}
 
-	got := DisplayPieces(pieces)
+	got := board.DisplayPieces(pieces)
 	want := "  1   2   3   4   5   6   7\n" +
 		"-----------------------------\n" +
 		"| . | . | . | . | . | . | . |\n" +
