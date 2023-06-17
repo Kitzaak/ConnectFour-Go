@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestDisplayEmpty(t *testing.T) {
+func Test_can_display_empty(t *testing.T) {
 	got := board.DisplayEmpty()
 	want := "  1   2   3   4   5   6   7\n" +
 		"-----------------------------\n" +
@@ -18,11 +18,11 @@ func TestDisplayEmpty(t *testing.T) {
 		"============================="
 
 	if got != want {
-		t.Errorf("got %q want %q", got, want)
+		t.Errorf("\ngot:\n%v\nwant:\n%v", got, want)
 	}
 }
 
-func TestDisplayPieces(t *testing.T) {
+func Test_can_display_pieces(t *testing.T) {
 	var pieces = [6][7]int{
 		{0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0},
@@ -44,7 +44,7 @@ func TestDisplayPieces(t *testing.T) {
 		"============================="
 
 	if got != want {
-		t.Errorf("got %q want %q", got, want)
+		t.Errorf("\ngot:\n%v\nwant:\n%v", got, want)
 	}
 
 }

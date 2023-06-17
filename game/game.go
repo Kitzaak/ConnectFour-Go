@@ -5,39 +5,43 @@ import (
 	"strconv"
 )
 
-type gamePieces struct {
-	_pieces    [6][7]int
-	_nextPiece int
+type Game struct {
+	pieces    [6][7]int
+	nextPiece int
 }
 
-func New() gamePieces {
-	g := gamePieces{}
-	g._nextPiece = 1
+func New() Game {
+	g := Game{}
+	g.nextPiece = 1
 	return g
 }
 
-func NewLoadExisting(pieces [6][7]int, nextPiece int) gamePieces {
-	g := gamePieces{}
-	g._pieces = pieces
-	g._nextPiece = nextPiece
+func NewLoadExisting(pieces [6][7]int, nextPiece int) Game {
+	g := Game{}
+	g.pieces = pieces
+	g.nextPiece = nextPiece
 	return g
 }
 
-func (g gamePieces) CurrentState() [6][7]int {
-	return g._pieces
+func (g Game) CurrentState() [6][7]int {
+	return g.pieces
 }
 
-func (g *gamePieces) AddPiece(col int) error {
+func (g Game) NextPiece() int {
+	return 0
+}
+
+func (g *Game) AddPiece(col int) error {
 	piecePlaced := false
 	for i := 5; i >= 0; i-- {
-		if g._pieces[i][col] == 0 {
-			g._pieces[i][col] = g._nextPiece
+		if g.pieces[i][col-1] == 0 {
+			g.pieces[i][col-1] = g.nextPiece
 			i = -1
 			piecePlaced = true
-			if g._nextPiece == 1 {
-				g._nextPiece = 2
+			if g.nextPiece == 1 {
+				g.nextPiece = 2
 			} else {
-				g._nextPiece = 1
+				g.nextPiece = 1
 			}
 		}
 	}
@@ -45,6 +49,6 @@ func (g *gamePieces) AddPiece(col int) error {
 	if piecePlaced {
 		return nil
 	} else {
-		return errors.New("Column " + strconv.Itoa(col+1) + " is full")
+		return errors.New("Column " + strconv.Itoa(col) + " is full")
 	}
 }
